@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -12,7 +10,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField 'String', "OAUTH_URL", oauth_url
         buildConfigField 'String', "OAUTH_ACCESS_TOKEN_URL", oauth_access_token_url
         buildConfigField 'String', "CLIENT_ID", client_id
@@ -26,15 +24,46 @@ android {
     }
 }
 
+ext.versions = [ANDROIDX         : "1.0.2",
+                CONSTRAINT_LAYOUT: "1.1.3",
+                LIFECYCLE        : "2.0.0-rc01",
+                PICASSO          : "2.71828",
+                RX_JAVA          : "2.1.16",
+                RX_ANDROID       : "2.1.0",
+                GSON             : "2.8.5",
+                RETROFIT         : "2.4.0",
+                DAGGER           : "2.16",
+                DAGGER_SUPPORT   : "2.17"]
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$versions.ANDROIDX"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.CONSTRAINT_LAYOUT"
 
-    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    //Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.LIFECYCLE"
+
+    //Picasso
+    implementation "com.squareup.picasso:picasso:$versions.PICASSO"
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.RX_ANDROID"
+    implementation "io.reactivex.rxjava2:rxjava:$versions.RX_JAVA"
+
+    //Retrofit
+    implementation "com.google.code.gson:gson:$versions.GSON"
+    implementation "com.squareup.retrofit2:retrofit:$versions.RETROFIT"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.RETROFIT"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.RETROFIT"
+
+    //DI Dagger
+    implementation "com.google.dagger:dagger:$versions.DAGGER"
+    implementation "com.google.dagger:dagger-android-support:$versions.DAGGER_SUPPORT"
+    kapt "com.google.dagger:dagger-android-processor:$versions.DAGGER"
+    kapt "com.google.dagger:dagger-compiler:$versions.DAGGER"
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
