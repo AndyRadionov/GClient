@@ -1,4 +1,4 @@
-package com.radionov.githubclient;
+package com.radionov.githubclient.ui;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;

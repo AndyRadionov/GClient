@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', "API_URL", api_url
         buildConfigField 'String', "OAUTH_URL", oauth_url
         buildConfigField 'String', "OAUTH_ACCESS_TOKEN_URL", oauth_access_token_url
         buildConfigField 'String', "CLIENT_ID", client_id

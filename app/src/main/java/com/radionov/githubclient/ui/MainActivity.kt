@@ -1,9 +1,10 @@
-package com.radionov.githubclient
+package com.radionov.githubclient.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.radionov.githubclient.R
 
 class MainActivity : AppCompatActivity() {
 
