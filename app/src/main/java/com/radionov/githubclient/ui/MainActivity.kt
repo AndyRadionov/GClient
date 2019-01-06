@@ -1,8 +1,8 @@
 package com.radionov.githubclient.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.radionov.githubclient.R
 

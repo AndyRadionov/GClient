@@ -1,6 +1,6 @@
 package com.radionov.githubclient.di.modules
 
-import androidx.annotation.NonNull
+import android.support.annotation.NonNull
 import com.radionov.githubclient.utils.RxComposers
 import dagger.Module
 import dagger.Provides

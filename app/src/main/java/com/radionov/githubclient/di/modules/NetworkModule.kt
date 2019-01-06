@@ -1,8 +1,8 @@
 package com.radionov.githubclient.di.modules
 
 import android.app.Application
+import android.support.annotation.NonNull
 import android.util.Log
-import androidx.annotation.NonNull
 import com.google.gson.Gson
 import com.radionov.githubclient.BuildConfig.API_URL
 import com.radionov.githubclient.data.datasource.GithubApi
