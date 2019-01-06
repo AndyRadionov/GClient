@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import static com.radionov.githubclient.BuildConfig.*;
 
-public class OAuthActivity extends AppCompatActivity {
+public class OAuthActivity extends BaseActivity {
     public static String TAG = "OAuthActivity";
 
     private TokenAsync tokenAsync;

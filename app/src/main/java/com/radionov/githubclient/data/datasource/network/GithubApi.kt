@@ -1,4 +1,4 @@
-package com.radionov.githubclient.data.datasource
+package com.radionov.githubclient.data.datasource.network
 
 /**
  * @author Andrey Radionov

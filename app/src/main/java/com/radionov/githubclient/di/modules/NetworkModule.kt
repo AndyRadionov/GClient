@@ -5,7 +5,7 @@ import android.support.annotation.NonNull
 import android.util.Log
 import com.google.gson.Gson
 import com.radionov.githubclient.BuildConfig.API_URL
-import com.radionov.githubclient.data.datasource.GithubApi
+import com.radionov.githubclient.data.datasource.network.GithubApi
 import com.radionov.githubclient.utils.NetworkManager
 import dagger.Module
 import dagger.Provides

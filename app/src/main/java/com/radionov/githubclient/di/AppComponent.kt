@@ -4,7 +4,6 @@ import android.app.Application
 import com.radionov.githubclient.App
 import com.radionov.githubclient.di.modules.ActivityBuilderModule
 import com.radionov.githubclient.di.modules.AppModule
-import com.radionov.githubclient.di.modules.FragmentBuilderModule
 import com.radionov.githubclient.di.modules.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
@@ -20,8 +19,7 @@ import javax.inject.Singleton
     AppModule::class,
     NetworkModule::class,
     AndroidSupportInjectionModule::class,
-    ActivityBuilderModule::class,
-    FragmentBuilderModule::class])
+    ActivityBuilderModule::class])
 interface AppComponent : AndroidInjector<App> {
 
     @Component.Builder
