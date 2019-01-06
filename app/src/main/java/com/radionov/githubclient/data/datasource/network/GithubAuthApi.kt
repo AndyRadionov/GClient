@@ -1,8 +1,7 @@
 package com.radionov.githubclient.data.datasource.network
 
-import io.reactivex.Observable
 import io.reactivex.Single
-import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 /**
@@ -10,7 +9,7 @@ import retrofit2.http.Query
  */
 interface GithubAuthApi {
 
-    @GET(".")
+    @POST(".")
     fun getToken(
         @Query("client_id") clientId: String,
         @Query("client_secret") clientSecret: String,

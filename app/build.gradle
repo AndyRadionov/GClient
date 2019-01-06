@@ -34,7 +34,9 @@ ext.versions = [ANDROID_SUPPORT  : "28.0.0",
                 RX_JAVA          : "2.1.16",
                 RX_ANDROID       : "2.1.0",
                 GSON             : "2.8.5",
+                OKHTTP_LOGGING   : "3.12.1",
                 RETROFIT         : "2.4.0",
+                RETROFIT_SCALARS : "2.5.0",
                 DAGGER           : "2.16"]
 
 dependencies {
@@ -56,8 +58,10 @@ dependencies {
     //Retrofit
     implementation "com.google.code.gson:gson:$versions.GSON"
     implementation "com.squareup.retrofit2:retrofit:$versions.RETROFIT"
+    implementation "com.squareup.retrofit2:converter-scalars:$versions.RETROFIT_SCALARS"
     implementation "com.squareup.retrofit2:converter-gson:$versions.RETROFIT"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.RETROFIT"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.OKHTTP_LOGGING"
 
     //DI Dagger
     implementation "com.google.dagger:dagger:$versions.DAGGER"

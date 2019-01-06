@@ -21,6 +21,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import com.google.gson.GsonBuilder
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.converter.scalars.ScalarsConverterFactory
+
 
 /**
  * @author Andrey Radionov
@@ -34,12 +38,12 @@ class NetworkModule {
     fun provideGithubApi(httpClient: OkHttpClient): GithubApi {
 
         return Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create(Gson()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(httpClient)
-                .build()
-                .create(GithubApi::class.java)
+            .baseUrl(API_URL)
+            .addConverterFactory(GsonConverterFactory.create(Gson()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(httpClient)
+            .build()
+            .create(GithubApi::class.java)
     }
 
     @NonNull
@@ -47,12 +51,19 @@ class NetworkModule {
     @Singleton
     fun provideGithubAuthApi(): GithubAuthApi {
 
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .build()
+
         return Retrofit.Builder()
-                .baseUrl(OAUTH_ACCESS_TOKEN_URL)
-                .addConverterFactory(GsonConverterFactory.create(Gson()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-                .create(GithubAuthApi::class.java)
+            .baseUrl(OAUTH_ACCESS_TOKEN_URL)
+            .client(client)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+            .create(GithubAuthApi::class.java)
     }
 
     @NonNull
@@ -60,17 +71,17 @@ class NetworkModule {
     @Singleton
     fun provideOkHttp(app: Application, networkManager: NetworkManager): OkHttpClient {
         return OkHttpClient.Builder()
-                .addInterceptor(initOfflineCacheInterceptor(networkManager))
-                .addNetworkInterceptor(initCacheInterceptor())
-                .cache(initCache(app))
-                .build()
+            .addInterceptor(initOfflineCacheInterceptor(networkManager))
+            .addNetworkInterceptor(initCacheInterceptor())
+            .cache(initCache(app))
+            .build()
     }
 
     @NonNull
     @Provides
     @Singleton
     fun provideNetworkManager(app: Application) =
-            NetworkManager(app.applicationContext)
+        NetworkManager(app.applicationContext)
 
 
     private fun initCache(app: Application): Cache? {
@@ -90,16 +101,16 @@ class NetworkModule {
 
             // re-write response header to force use of cache
             val cacheControl = CacheControl.Builder()
-                    .maxAge(MAX_AGE, TimeUnit.MINUTES)
-                    .build()
+                .maxAge(MAX_AGE, TimeUnit.MINUTES)
+                .build()
 
             response.newBuilder()
-                    .removeHeader(PRAGMA_HEADER)
-                    .removeHeader(ACCESS_CONTROL_ALLOW_ORIGIN_HEADER)
-                    .removeHeader(VARY_HEADER)
-                    .removeHeader(CACHE_CONTROL_HEADER)
-                    .header(CACHE_CONTROL_HEADER, cacheControl.toString())
-                    .build()
+                .removeHeader(PRAGMA_HEADER)
+                .removeHeader(ACCESS_CONTROL_ALLOW_ORIGIN_HEADER)
+                .removeHeader(VARY_HEADER)
+                .removeHeader(CACHE_CONTROL_HEADER)
+                .header(CACHE_CONTROL_HEADER, cacheControl.toString())
+                .build()
         }
     }
 
@@ -109,12 +120,12 @@ class NetworkModule {
 
             if (!networkManager.isInternetAvailable()) {
                 val cacheControl = CacheControl.Builder()
-                        .maxStale(STALE_TIME, TimeUnit.DAYS)
-                        .build()
+                    .maxStale(STALE_TIME, TimeUnit.DAYS)
+                    .build()
 
                 request = request.newBuilder()
-                        .cacheControl(cacheControl)
-                        .build()
+                    .cacheControl(cacheControl)
+                    .build()
             }
 
             chain.proceed(request)

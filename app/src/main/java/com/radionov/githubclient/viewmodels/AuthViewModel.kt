@@ -29,7 +29,7 @@ class AuthViewModel(private val authRepository: AuthRepository,
                 } else {
                     responseLiveData.postValue(RESPONSES.SUCCESS)
                 }
-            }, { responseLiveData.postValue(RESPONSES.FAIL) })
+            }, { e -> responseLiveData.postValue(RESPONSES.FAIL) })
     }
 
     override fun onCleared() {

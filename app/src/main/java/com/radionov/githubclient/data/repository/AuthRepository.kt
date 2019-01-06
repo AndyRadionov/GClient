@@ -22,5 +22,6 @@ class AuthRepository(
 
     fun getRemoteToken(accessCode: String): Single<String> =
         authApi.getToken(CLIENT_ID, CLIENT_SECRET, accessCode)
+            .map { token -> token.substringAfter("=").substringBefore("&") }
             .doOnSuccess { token -> prefs.setToken(token) }
 }
