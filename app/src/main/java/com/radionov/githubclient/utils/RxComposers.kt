@@ -1,9 +1,6 @@
 package com.radionov.githubclient.utils
 
-import io.reactivex.CompletableTransformer
-import io.reactivex.FlowableTransformer
-import io.reactivex.ObservableTransformer
-import io.reactivex.Scheduler
+import io.reactivex.*
 
 /**
  * @author Andrey Radionov
@@ -33,6 +30,13 @@ class RxComposers(private val subscribeScheduler: Scheduler,
             observable
                     .subscribeOn(subscribeScheduler)
                     .observeOn(observeScheduler)
+        }
+    }
+
+    fun <T> getSingleComposer(): SingleTransformer<T, T> {
+        return SingleTransformer { single ->
+            single.subscribeOn(subscribeScheduler)
+                .observeOn(observeScheduler)
         }
     }
 }

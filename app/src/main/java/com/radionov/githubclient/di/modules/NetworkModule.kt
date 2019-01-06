@@ -5,7 +5,9 @@ import android.support.annotation.NonNull
 import android.util.Log
 import com.google.gson.Gson
 import com.radionov.githubclient.BuildConfig.API_URL
+import com.radionov.githubclient.BuildConfig.OAUTH_ACCESS_TOKEN_URL
 import com.radionov.githubclient.data.datasource.network.GithubApi
+import com.radionov.githubclient.data.datasource.network.GithubAuthApi
 import com.radionov.githubclient.utils.NetworkManager
 import dagger.Module
 import dagger.Provides
@@ -38,6 +40,19 @@ class NetworkModule {
                 .client(httpClient)
                 .build()
                 .create(GithubApi::class.java)
+    }
+
+    @NonNull
+    @Provides
+    @Singleton
+    fun provideGithubAuthApi(): GithubAuthApi {
+
+        return Retrofit.Builder()
+                .baseUrl(OAUTH_ACCESS_TOKEN_URL)
+                .addConverterFactory(GsonConverterFactory.create(Gson()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+                .create(GithubAuthApi::class.java)
     }
 
     @NonNull

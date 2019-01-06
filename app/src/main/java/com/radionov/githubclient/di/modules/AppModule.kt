@@ -4,6 +4,7 @@ import android.app.Application
 import android.preference.PreferenceManager
 import android.support.annotation.NonNull
 import com.radionov.githubclient.data.datasource.local.Prefs
+import com.radionov.githubclient.data.datasource.network.GithubAuthApi
 import com.radionov.githubclient.data.repository.AuthRepository
 import com.radionov.githubclient.utils.RxComposers
 import dagger.Module
@@ -22,7 +23,7 @@ class AppModule {
     @NonNull
     @Provides
     @Singleton
-    fun provideAuthRepository() = AuthRepository()
+    fun provideAuthRepository(authApi: GithubAuthApi, prefs: Prefs) = AuthRepository(authApi, prefs)
 
     @NonNull
     @Provides
