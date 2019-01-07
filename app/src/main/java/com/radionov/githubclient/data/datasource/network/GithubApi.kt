@@ -12,11 +12,11 @@ import retrofit2.http.Path
 interface GithubApi {
 
     @GET("user/repos")
-    fun getRepositories(): Observable<Repository>
+    fun getRepositories(): Observable<List<Repository>>
 
     @GET("repos/{owner}/{repo}/commits")
     fun getCommits(
         @Path("owner") owner: String,
         @Path("repo") repo: String
-    ): Observable<Commit>
+    ): Observable<List<Commit>>
 }
