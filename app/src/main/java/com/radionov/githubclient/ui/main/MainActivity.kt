@@ -1,14 +1,14 @@
-package com.radionov.githubclient.ui
+package com.radionov.githubclient.ui.main
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.radionov.githubclient.R
+import com.radionov.githubclient.ui.auth.OAuthActivity
+import com.radionov.githubclient.ui.common.BaseActivity
 import com.radionov.githubclient.utils.AuthStates
-import com.radionov.githubclient.utils.Responses
 import com.radionov.githubclient.viewmodels.MainViewModel
 
 class MainActivity : BaseActivity() {

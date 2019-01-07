@@ -1,7 +1,7 @@
 package com.radionov.githubclient.di.modules
 
-import com.radionov.githubclient.ui.MainActivity
-import com.radionov.githubclient.ui.OAuthActivity
+import com.radionov.githubclient.ui.main.MainActivity
+import com.radionov.githubclient.ui.auth.OAuthActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

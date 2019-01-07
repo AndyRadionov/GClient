@@ -1,4 +1,4 @@
-package com.radionov.githubclient.ui
+package com.radionov.githubclient.ui.auth
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -9,6 +9,7 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import com.radionov.githubclient.BuildConfig.CLIENT_ID
 import com.radionov.githubclient.BuildConfig.OAUTH_URL
+import com.radionov.githubclient.ui.common.BaseActivity
 import com.radionov.githubclient.utils.Responses
 import com.radionov.githubclient.viewmodels.AuthViewModel
 
