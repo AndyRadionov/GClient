@@ -5,6 +5,10 @@ package com.radionov.githubclient.utils
  */
 const val EMPTY_STRING = ""
 
-enum class RESPONSES {
+enum class Responses {
     SUCCESS, FAIL
+}
+
+enum class AuthStates {
+    LOGGED, OUT
 }

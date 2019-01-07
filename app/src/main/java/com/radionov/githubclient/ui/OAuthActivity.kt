@@ -4,13 +4,12 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import com.radionov.githubclient.BuildConfig.CLIENT_ID
 import com.radionov.githubclient.BuildConfig.OAUTH_URL
-import com.radionov.githubclient.utils.RESPONSES
+import com.radionov.githubclient.utils.Responses
 import com.radionov.githubclient.viewmodels.AuthViewModel
 
 class OAuthActivity : BaseActivity() {
@@ -48,8 +47,8 @@ class OAuthActivity : BaseActivity() {
             .get(AuthViewModel::class.java)
 
         viewModel.subscribeResponse()
-            .observe(this, Observer<RESPONSES> { response ->
-                if (response == RESPONSES.SUCCESS) {
+            .observe(this, Observer<Responses> { response ->
+                if (response == Responses.SUCCESS) {
                     Toast.makeText(this@OAuthActivity, "Success", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this@OAuthActivity, "Fail", Toast.LENGTH_SHORT).show()

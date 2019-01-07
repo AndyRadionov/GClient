@@ -9,7 +9,7 @@ import io.reactivex.Single
 /**
  * @author Andrey Radionov
  */
-class AuthRepository(
+class GithubAuthRepository(
     private val authApi: GithubAuthApi,
     private val prefs: Prefs
 ) {
