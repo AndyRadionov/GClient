@@ -22,10 +22,6 @@ class MainActivity : BaseActivity() {
         initViewModel()
     }
 
-    fun onAuthClick(v: View) {
-        startActivity(Intent(this, OAuthActivity::class.java))
-    }
-
     private fun initViewModel() {
         viewModel = ViewModelProviders
             .of(this, viewModeFactory)
@@ -34,11 +30,17 @@ class MainActivity : BaseActivity() {
         viewModel.subscribeAuthState()
             .observe(this, Observer<AuthStates> { state ->
                 if (state == AuthStates.LOGGED) {
-                    //init()
+                    init()
                 } else {
-                    //start OAUTH
+                    val intent = Intent(this, OAuthActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
                 }
             })
+    }
+
+    private fun init() {
+
     }
 
 }
