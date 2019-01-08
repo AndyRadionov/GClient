@@ -3,6 +3,7 @@ package com.radionov.githubclient.di.modules
 import android.app.Application
 import android.preference.PreferenceManager
 import android.support.annotation.NonNull
+import com.radionov.githubclient.data.datasource.local.CacheManager
 import com.radionov.githubclient.data.datasource.local.Prefs
 import com.radionov.githubclient.data.datasource.network.GithubApi
 import com.radionov.githubclient.data.datasource.network.GithubAuthApi
@@ -25,7 +26,8 @@ class AppModule {
     @NonNull
     @Provides
     @Singleton
-    fun provideAuthRepository(authApi: GithubAuthApi, prefs: Prefs) = GithubAuthRepository(authApi, prefs)
+    fun provideAuthRepository(authApi: GithubAuthApi, prefs: Prefs, cacheManager: CacheManager) =
+        GithubAuthRepository(authApi, prefs, cacheManager)
 
     @NonNull
     @Provides

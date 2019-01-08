@@ -38,7 +38,7 @@ class ReposAdapter(private val listener: OnItemClickListener) : RecyclerView.Ada
 
         fun bind(repository: Repository) {
             itemView.tv_repo_name.text = repository.name
-            itemView.setOnClickListener { _ -> listener.onClick(repository) }
+            itemView.setOnClickListener { listener.onClick(repository) }
         }
     }
 

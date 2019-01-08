@@ -2,9 +2,11 @@ package com.radionov.githubclient.ui.auth
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.webkit.WebStorage
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
@@ -14,6 +16,8 @@ import com.radionov.githubclient.ui.common.BaseActivity
 import com.radionov.githubclient.ui.main.MainActivity
 import com.radionov.githubclient.utils.Responses
 import com.radionov.githubclient.viewmodels.AuthViewModel
+import java.io.File
+
 
 class OAuthActivity : BaseActivity() {
 
@@ -26,8 +30,7 @@ class OAuthActivity : BaseActivity() {
 
         val webview = WebView(this)
         webview.clearCache(true)
-        webview.clearHistory()
-        webview.clearFormData()
+        WebStorage.getInstance().deleteAllData()
         webview.settings.javaScriptEnabled = true
         webview.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {

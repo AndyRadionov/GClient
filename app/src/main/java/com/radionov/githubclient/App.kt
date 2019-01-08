@@ -1,13 +1,14 @@
 package com.radionov.githubclient
 
+import com.radionov.githubclient.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import com.radionov.githubclient.di.DaggerAppComponent
+
 
 /**
  * @author Andrey Radionov
  */
-class App: DaggerApplication() {
+class App : DaggerApplication() {
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
         DaggerAppComponent

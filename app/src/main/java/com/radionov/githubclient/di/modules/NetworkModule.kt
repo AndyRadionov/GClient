@@ -6,6 +6,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.radionov.githubclient.BuildConfig.API_URL
 import com.radionov.githubclient.BuildConfig.OAUTH_ACCESS_TOKEN_URL
+import com.radionov.githubclient.data.datasource.local.CacheManager
 import com.radionov.githubclient.data.datasource.network.GithubApi
 import com.radionov.githubclient.data.datasource.network.GithubAuthApi
 import com.radionov.githubclient.utils.NetworkManager
@@ -22,6 +23,7 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import com.radionov.githubclient.data.datasource.local.Prefs
+import com.radionov.githubclient.utils.RxComposers
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
@@ -67,6 +69,11 @@ class NetworkModule {
             .build()
             .create(GithubAuthApi::class.java)
     }
+
+    @NonNull
+    @Provides
+    @Singleton
+    fun provideCacheManager(app: Application, rxComposers: RxComposers) = CacheManager(app, rxComposers)
 
     @NonNull
     @Provides

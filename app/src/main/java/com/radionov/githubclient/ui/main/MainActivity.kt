@@ -12,6 +12,8 @@ import com.radionov.githubclient.R
 import com.radionov.githubclient.data.entity.Repository
 import com.radionov.githubclient.ui.auth.OAuthActivity
 import com.radionov.githubclient.ui.common.BaseActivity
+import com.radionov.githubclient.ui.details.DetailsActivity
+import com.radionov.githubclient.ui.details.REPO_EXTRA
 import com.radionov.githubclient.utils.AuthStates
 import com.radionov.githubclient.utils.Responses
 import com.radionov.githubclient.viewmodels.MainViewModel
@@ -23,7 +25,9 @@ class MainActivity : BaseActivity() {
     private lateinit var reposAdapter: ReposAdapter
     private val clickListener = object: ReposAdapter.OnItemClickListener {
         override fun onClick(repository: Repository) {
-
+            val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+            intent.putExtra(REPO_EXTRA, repository)
+            startActivity(intent)
         }
     }
 
@@ -36,13 +40,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        val item = menu.findItem(R.id.action_signout)
-
-        item.isEnabled = viewModel.isSignedIn()
         return true
     }
 
@@ -74,7 +71,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun init() {
-        invalidateOptionsMenu()
         reposAdapter = ReposAdapter(clickListener)
 
         repos_container.layoutManager = LinearLayoutManager(this)

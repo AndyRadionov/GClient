@@ -38,8 +38,6 @@ class MainViewModel(private val authRepository: GithubAuthRepository,
         authLiveData.postValue(AuthStates.OUT)
     }
 
-    fun isSignedIn() = authRepository.getLocalToken().isNotEmpty()
-
     fun getRepositories() {
         dispose()
         disposable = githubRepository.getRepositories()
