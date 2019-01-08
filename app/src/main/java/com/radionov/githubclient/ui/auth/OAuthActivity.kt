@@ -25,6 +25,9 @@ class OAuthActivity : BaseActivity() {
         initViewModel()
 
         val webview = WebView(this)
+        webview.clearCache(true)
+        webview.clearHistory()
+        webview.clearFormData()
         webview.settings.javaScriptEnabled = true
         webview.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {

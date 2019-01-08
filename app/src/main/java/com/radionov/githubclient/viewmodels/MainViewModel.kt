@@ -15,7 +15,7 @@ import java.util.*
 /**
  * @author Andrey Radionov
  */
-class MainViewModel(authRepository: GithubAuthRepository,
+class MainViewModel(private val authRepository: GithubAuthRepository,
                     private val githubRepository: GithubRepository,
                     private val rxComposers: RxComposers
 ) : ViewModel() {
@@ -31,6 +31,14 @@ class MainViewModel(authRepository: GithubAuthRepository,
     }
 
     fun subscribeAuthState() = authLiveData
+    fun subscribeRepos() = reposLiveData
+
+    fun signOut() {
+        authRepository.removeLocalToken()
+        authLiveData.postValue(AuthStates.OUT)
+    }
+
+    fun isSignedIn() = authRepository.getLocalToken().isNotEmpty()
 
     fun getRepositories() {
         dispose()

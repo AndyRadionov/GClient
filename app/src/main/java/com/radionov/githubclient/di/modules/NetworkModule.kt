@@ -21,9 +21,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-import com.google.gson.GsonBuilder
+import com.radionov.githubclient.data.datasource.local.Prefs
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.scalars.ScalarsConverterFactory
+
+
 
 
 /**
@@ -69,8 +71,13 @@ class NetworkModule {
     @NonNull
     @Provides
     @Singleton
-    fun provideOkHttp(app: Application, networkManager: NetworkManager): OkHttpClient {
+    fun provideOkHttp(app: Application, networkManager: NetworkManager, prefs: Prefs): OkHttpClient {
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+
         return OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .addInterceptor(initAuthInterceptor(prefs))
             .addInterceptor(initOfflineCacheInterceptor(networkManager))
             .addNetworkInterceptor(initCacheInterceptor())
             .cache(initCache(app))
@@ -127,6 +134,21 @@ class NetworkModule {
                     .cacheControl(cacheControl)
                     .build()
             }
+
+            chain.proceed(request)
+        }
+    }
+
+    private fun initAuthInterceptor(prefs: Prefs): Interceptor {
+        val apiToken = "token " + prefs.getToken()
+
+        return Interceptor { chain ->
+            val original = chain.request()
+
+            val request = original.newBuilder()
+                .header("Authorization", apiToken)
+                .method(original.method(), original.body())
+                .build()
 
             chain.proceed(request)
         }

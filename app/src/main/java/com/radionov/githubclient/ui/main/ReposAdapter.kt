@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.radionov.githubclient.R
 import com.radionov.githubclient.data.entity.Repository
 import com.radionov.githubclient.utils.ReposDiffCallback
+import kotlinx.android.synthetic.main.item_repo.view.*
 
 class ReposAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
 
@@ -36,8 +37,8 @@ class ReposAdapter(private val listener: OnItemClickListener) : RecyclerView.Ada
         RecyclerView.ViewHolder(itemView) {
 
         fun bind(repository: Repository) {
-
-            itemView.setOnClickListener { view -> listener.onClick(repository) }
+            itemView.tv_repo_name.text = repository.name
+            itemView.setOnClickListener { _ -> listener.onClick(repository) }
         }
     }
 
