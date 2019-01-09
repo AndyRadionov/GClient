@@ -98,8 +98,9 @@ class MainActivity : BaseActivity() {
         viewModel.getRepositories()
     }
 
-    private fun setVisibility(empty: Int = View.GONE, container: Int = View.GONE) {
-        group_empty.visibility = empty
+    private fun setVisibility(empty: Int = View.INVISIBLE, container: Int = View.INVISIBLE) {
+        tv_empty.visibility = empty
+        btn_load.visibility = empty
         repos_container.visibility = container
     }
 }

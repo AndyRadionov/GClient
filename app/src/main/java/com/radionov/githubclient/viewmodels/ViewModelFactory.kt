@@ -17,12 +17,19 @@ class ViewModelFactory @Inject constructor(
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            MainViewModel(authRepository, githubRepository, rxComposers) as T
-        } else if (modelClass.isAssignableFrom(AuthViewModel::class.java)) {
-            AuthViewModel(authRepository, rxComposers) as T
-        } else {
-            throw IllegalArgumentException("ViewModel type was not found")
+        return when {
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(authRepository, githubRepository, rxComposers) as T
+            }
+            modelClass.isAssignableFrom(AuthViewModel::class.java) -> {
+                AuthViewModel(authRepository, rxComposers) as T
+            }
+            modelClass.isAssignableFrom(DetailsViewModel::class.java) -> {
+                DetailsViewModel(githubRepository, rxComposers) as T
+            }
+            else -> {
+                throw IllegalArgumentException("ViewModel type was not found")
+            }
         }
     }
 }
