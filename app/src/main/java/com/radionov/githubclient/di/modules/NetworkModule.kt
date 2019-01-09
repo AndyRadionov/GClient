@@ -84,7 +84,6 @@ class NetworkModule {
 
         return OkHttpClient.Builder()
             .addInterceptor(logging)
-            .addInterceptor(initAuthInterceptor(prefs))
             .addInterceptor(initOfflineCacheInterceptor(networkManager))
             .addNetworkInterceptor(initCacheInterceptor())
             .cache(initCache(app))
@@ -141,21 +140,6 @@ class NetworkModule {
                     .cacheControl(cacheControl)
                     .build()
             }
-
-            chain.proceed(request)
-        }
-    }
-
-    private fun initAuthInterceptor(prefs: Prefs): Interceptor {
-        val apiToken = "token " + prefs.getToken()
-
-        return Interceptor { chain ->
-            val original = chain.request()
-
-            val request = original.newBuilder()
-                .header("Authorization", apiToken)
-                .method(original.method(), original.body())
-                .build()
 
             chain.proceed(request)
         }

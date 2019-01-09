@@ -32,7 +32,7 @@ class AppModule {
     @NonNull
     @Provides
     @Singleton
-    fun provideGithubRepository(api: GithubApi) = GithubRepository(api)
+    fun provideGithubRepository(api: GithubApi, prefs: Prefs) = GithubRepository(api, prefs)
 
     @NonNull
     @Provides

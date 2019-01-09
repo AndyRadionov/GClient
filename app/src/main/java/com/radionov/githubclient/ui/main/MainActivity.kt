@@ -87,16 +87,19 @@ class MainActivity : BaseActivity() {
                 response?.let {
                     swipe_container.isRefreshing = false
                     if (it.first == Responses.FAIL) {
-                        group_empty.visibility = View.VISIBLE
-                        repos_container.visibility = View.INVISIBLE
+                        setVisibility(empty = View.VISIBLE)
                     } else {
-                        group_empty.visibility = View.INVISIBLE
-                        repos_container.visibility = View.VISIBLE
+                        setVisibility(container = View.VISIBLE)
                         reposAdapter.setData(it.second)
                     }
                 }
             })
 
         viewModel.getRepositories()
+    }
+
+    private fun setVisibility(empty: Int = View.GONE, container: Int = View.GONE) {
+        group_empty.visibility = empty
+        repos_container.visibility = container
     }
 }
