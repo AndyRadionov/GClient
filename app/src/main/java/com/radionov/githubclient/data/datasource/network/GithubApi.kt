@@ -1,6 +1,6 @@
 package com.radionov.githubclient.data.datasource.network
 
-import com.radionov.githubclient.data.entity.Commit
+import com.radionov.githubclient.data.entity.CommitResponse
 import com.radionov.githubclient.data.entity.Repository
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -17,8 +17,8 @@ interface GithubApi {
 
     @GET("repos/{owner}/{repo}/commits")
     fun getCommits(
-        @Query("access_token") token: String,
         @Path("owner") owner: String,
-        @Path("repo") repo: String
-    ): Observable<List<Commit>>
+        @Path("repo") repo: String,
+        @Query("access_token") token: String
+    ): Observable<List<CommitResponse>>
 }

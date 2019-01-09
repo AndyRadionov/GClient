@@ -3,6 +3,7 @@ package com.radionov.githubclient.viewmodels
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.radionov.githubclient.data.entity.Commit
+import com.radionov.githubclient.data.entity.CommitResponse
 import com.radionov.githubclient.data.repository.GithubRepository
 import com.radionov.githubclient.utils.Responses
 import com.radionov.githubclient.utils.RxComposers
@@ -16,7 +17,7 @@ class DetailsViewModel(private val githubRepository: GithubRepository,
 ) : ViewModel() {
 
     private var disposable: Disposable? = null
-    private val commitLiveData = MutableLiveData<Pair<Responses, Commit?>>()
+    private val commitLiveData = MutableLiveData<Pair<Responses, CommitResponse?>>()
 
     fun subscribeCommit() = commitLiveData
 
