@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.radionov.githubclient.R
 import com.radionov.githubclient.data.entity.Repository
 import com.radionov.githubclient.utils.ReposDiffCallback
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_repo.view.*
 
 class ReposAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<ReposAdapter.ReposViewHolder>() {
@@ -37,7 +38,14 @@ class ReposAdapter(private val listener: OnItemClickListener) : RecyclerView.Ada
         RecyclerView.ViewHolder(itemView) {
 
         fun bind(repository: Repository) {
+            itemView.tv_author_name.text = repository.owner.login
             itemView.tv_repo_name.text = repository.name
+            val license = repository.license?.key ?: "None"
+            itemView.tv_repo_license.text = license
+            Picasso.get()
+                .load(repository.owner.avatarUrl)
+                .placeholder(R.drawable.ic_person_black)
+                .into(itemView.iv_author_image)
             itemView.setOnClickListener { listener.onClick(repository) }
         }
     }

@@ -25,12 +25,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 ext.versions = [ANDROID_SUPPORT  : "28.0.0",
                 CONSTRAINT_LAYOUT: "1.1.3",
                 LIFECYCLE        : "1.1.1",
                 PICASSO          : "2.71828",
+                ROUND_IMAGE      : "2.3.0",
                 RX_JAVA          : "2.1.16",
                 RX_ANDROID       : "2.1.0",
                 GSON             : "2.8.5",
@@ -50,8 +54,9 @@ dependencies {
     //Lifecycle
     implementation "android.arch.lifecycle:extensions:$versions.LIFECYCLE"
 
-    //Picasso
+    //Images
     implementation "com.squareup.picasso:picasso:$versions.PICASSO"
+    implementation "com.makeramen:roundedimageview:$versions.ROUND_IMAGE"
 
     //Rx
     implementation "io.reactivex.rxjava2:rxandroid:$versions.RX_ANDROID"
