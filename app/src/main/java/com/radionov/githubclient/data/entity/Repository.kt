@@ -1,5 +1,7 @@
 package com.radionov.githubclient.data.entity
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -8,8 +10,9 @@ import kotlinx.android.parcel.Parcelize
  * @author Andrey Radionov
  */
 @Parcelize
+@Entity(tableName = "repositories")
 data class Repository(
-    @SerializedName("id") val id: Int,
+    @SerializedName("id") @PrimaryKey val id: Int,
     @SerializedName("name") val name: String,
     @SerializedName("full_name") val fullName: String,
     @SerializedName("description") val description: String?,

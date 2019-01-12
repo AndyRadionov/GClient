@@ -1,13 +1,17 @@
 package com.radionov.githubclient.data.entity
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 /**
  * @author Andrey Radionov
  */
+@Entity(tableName = "commits")
 data class CommitResponse(
-    @SerializedName("sha") val sha: String,
-    @SerializedName("commit") val commit: Commit
+    @SerializedName("sha") @PrimaryKey val sha: String,
+    @SerializedName("commit") val commit: Commit,
+    var repo: String? = null
 )
 
 data class Commit(
