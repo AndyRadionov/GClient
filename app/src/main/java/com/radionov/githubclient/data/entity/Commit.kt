@@ -1,5 +1,6 @@
 package com.radionov.githubclient.data.entity
 
+import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -10,13 +11,13 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "commits")
 data class CommitResponse(
     @SerializedName("sha") @PrimaryKey val sha: String,
-    @SerializedName("commit") val commit: Commit,
+    @SerializedName("commit") @Embedded val commit: Commit,
     var repo: String? = null
 )
 
 data class Commit(
     @SerializedName("message") val message: String,
-    @SerializedName("author") val author: Author
+    @SerializedName("author") @Embedded val author: Author
 )
 
 data class Author(

@@ -1,5 +1,6 @@
 package com.radionov.githubclient.data.entity
 
+import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
@@ -19,8 +20,8 @@ data class Repository(
     @SerializedName("forks_count") val forksCount: Int,
     @SerializedName("stargazers_count") val starsCount: Int,
     @SerializedName("watchers_count") val watchersCount: Int,
-    @SerializedName("owner") val owner: Owner,
-    @SerializedName("license") val license: License?
+    @SerializedName("owner") @Embedded val owner: Owner,
+    @SerializedName("license") @Embedded val license: License?
 ) : Parcelable
 
 @Parcelize
@@ -32,5 +33,5 @@ data class Owner(
 @Parcelize
 data class License(
     @SerializedName("key") val key: String,
-    @SerializedName("name") val name: String
+    @SerializedName("name") val licenseName: String
 ) : Parcelable

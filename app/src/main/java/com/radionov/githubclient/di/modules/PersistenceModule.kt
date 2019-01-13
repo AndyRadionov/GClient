@@ -8,12 +8,14 @@ import com.radionov.githubclient.data.datasource.local.Prefs
 import com.radionov.githubclient.data.datasource.local.db.AppDatabase
 import com.radionov.githubclient.data.datasource.local.db.CommitsDao
 import com.radionov.githubclient.data.datasource.local.db.ReposDao
+import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 /**
  * @author Andrey Radionov
  */
+@Module
 class PersistenceModule {
 
     @NonNull
