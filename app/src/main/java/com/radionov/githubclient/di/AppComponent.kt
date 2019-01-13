@@ -5,6 +5,7 @@ import com.radionov.githubclient.App
 import com.radionov.githubclient.di.modules.ActivityBuilderModule
 import com.radionov.githubclient.di.modules.AppModule
 import com.radionov.githubclient.di.modules.NetworkModule
+import com.radionov.githubclient.di.modules.PersistenceModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -18,6 +19,7 @@ import javax.inject.Singleton
 @Component(modules = [
     AppModule::class,
     NetworkModule::class,
+    PersistenceModule::class,
     AndroidSupportInjectionModule::class,
     ActivityBuilderModule::class])
 interface AppComponent : AndroidInjector<App> {

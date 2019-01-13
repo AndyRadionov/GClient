@@ -15,7 +15,7 @@ interface CommitsDao {
     fun getCommit(repo: String) : Single<CommitResponse>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addCommits(commit: CommitResponse)
+    fun addCommit(commit: CommitResponse)
 
     @Query("DELETE FROM commits")
     fun clear()
