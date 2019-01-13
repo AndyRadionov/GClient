@@ -1,14 +1,22 @@
 package com.radionov.githubclient.data.entity
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
+import android.arch.persistence.room.ForeignKey.CASCADE
 import com.google.gson.annotations.SerializedName
 
 /**
  * @author Andrey Radionov
  */
-@Entity(tableName = "commits")
+@Entity(
+    tableName = "commits",
+    foreignKeys = [ForeignKey(
+        entity = Repository::class,
+        parentColumns = ["name"],
+        childColumns = ["repo"],
+        onDelete = CASCADE
+    )],
+    indices = [Index(value = ["repo"])]
+)
 data class CommitResponse(
     @SerializedName("sha") @PrimaryKey val sha: String,
     @SerializedName("commit") @Embedded val commit: Commit,
