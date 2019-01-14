@@ -10,4 +10,12 @@ class ReposInteractor(
     private val githubRepository: GithubRepository,
     private val localRepository: LocalRepository
 ) {
+
+    fun getRepositories() {
+
+    }
+
+    fun getLastCommit(owner: String, repo: String) {
+
+    }
 }
