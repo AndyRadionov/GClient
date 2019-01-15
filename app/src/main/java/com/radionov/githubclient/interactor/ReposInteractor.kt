@@ -12,7 +12,7 @@ class ReposInteractor(
 ) {
 
     fun getRepositories() {
-
+        githubRepository.getRepositories()
     }
 
     fun getLastCommit(owner: String, repo: String) {
