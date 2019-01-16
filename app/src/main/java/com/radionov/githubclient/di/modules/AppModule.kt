@@ -30,8 +30,10 @@ class AppModule {
     @NonNull
     @Provides
     @Singleton
-    fun provideReposInteractor(githubRepository: GithubRepository, localRepository: LocalRepository) =
-        ReposInteractor(githubRepository, localRepository)
+    fun provideReposInteractor(
+        authRepository: GithubAuthRepository,
+        githubRepository: GithubRepository, localRepository: LocalRepository
+    ) = ReposInteractor(authRepository, githubRepository, localRepository)
 
     @NonNull
     @Provides
