@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.radionov.githubclient.data.repository.GithubAuthRepository
 import com.radionov.githubclient.data.repository.GithubRepository
+import com.radionov.githubclient.interactor.ReposInteractor
 import com.radionov.githubclient.utils.RxComposers
 import javax.inject.Inject
 
@@ -11,21 +12,20 @@ import javax.inject.Inject
  * @author Andrey Radionov
  */
 class ViewModelFactory @Inject constructor(
-    private val authRepository: GithubAuthRepository,
-    private val githubRepository: GithubRepository,
+    private val reposInteractor: ReposInteractor,
     private val rxComposers: RxComposers
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                MainViewModel(authRepository, githubRepository, rxComposers) as T
+                MainViewModel(reposInteractor, rxComposers) as T
             }
             modelClass.isAssignableFrom(AuthViewModel::class.java) -> {
-                AuthViewModel(authRepository, rxComposers) as T
+                AuthViewModel(reposInteractor, rxComposers) as T
             }
             modelClass.isAssignableFrom(DetailsViewModel::class.java) -> {
-                DetailsViewModel(githubRepository, rxComposers) as T
+                DetailsViewModel(reposInteractor, rxComposers) as T
             }
             else -> {
                 throw IllegalArgumentException("ViewModel type was not found")

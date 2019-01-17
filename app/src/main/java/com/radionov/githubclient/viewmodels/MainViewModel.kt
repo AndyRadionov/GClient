@@ -6,6 +6,7 @@ import android.text.TextUtils
 import com.radionov.githubclient.data.entity.Repository
 import com.radionov.githubclient.data.repository.GithubAuthRepository
 import com.radionov.githubclient.data.repository.GithubRepository
+import com.radionov.githubclient.interactor.ReposInteractor
 import com.radionov.githubclient.utils.AuthStates
 import com.radionov.githubclient.utils.Responses
 import com.radionov.githubclient.utils.RxComposers
@@ -15,8 +16,7 @@ import java.util.*
 /**
  * @author Andrey Radionov
  */
-class MainViewModel(private val authRepository: GithubAuthRepository,
-                    private val githubRepository: GithubRepository,
+class MainViewModel(private val reposInteractor: ReposInteractor,
                     private val rxComposers: RxComposers
 ) : ViewModel() {
 
@@ -25,8 +25,7 @@ class MainViewModel(private val authRepository: GithubAuthRepository,
     private val reposLiveData = MutableLiveData<Pair<Responses, List<Repository>>>()
 
     init {
-        val authState = if (authRepository.getLocalToken().isEmpty())
-            AuthStates.OUT else AuthStates.LOGGED
+        val authState = if (reposInteractor.isAuthorized()) AuthStates.LOGGED else AuthStates.OUT
         authLiveData.postValue(authState)
     }
 
@@ -34,13 +33,13 @@ class MainViewModel(private val authRepository: GithubAuthRepository,
     fun subscribeRepos() = reposLiveData
 
     fun signOut() {
-        authRepository.removeLocalToken()
+        reposInteractor.signOut()
         authLiveData.postValue(AuthStates.OUT)
     }
 
     fun getRepositories() {
         dispose()
-        disposable = githubRepository.getRepositories()
+        disposable = reposInteractor.getRepositories()
             .compose(rxComposers.getObservableComposer())
             .subscribe({ repos ->
                 if (repos.isNullOrEmpty()) {
