@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.text.TextUtils
 import com.radionov.githubclient.data.repository.GithubAuthRepository
+import com.radionov.githubclient.interactor.ReposInteractor
 import com.radionov.githubclient.utils.Responses
 import com.radionov.githubclient.utils.RxComposers
 import io.reactivex.disposables.Disposable
@@ -11,7 +12,7 @@ import io.reactivex.disposables.Disposable
 /**
  * @author Andrey Radionov
  */
-class AuthViewModel(private val authRepository: GithubAuthRepository,
+class AuthViewModel(private val reposInteractor: ReposInteractor,
                     private val rxComposers: RxComposers) : ViewModel() {
 
     private var disposable: Disposable? = null
@@ -21,7 +22,7 @@ class AuthViewModel(private val authRepository: GithubAuthRepository,
 
     fun getToken(accessCode: String) {
         dispose()
-        disposable = authRepository.getRemoteToken(accessCode)
+        disposable = reposInteractor.signIn(accessCode)
             .compose(rxComposers.getSingleComposer())
             .subscribe({ token ->
                 if (TextUtils.isEmpty(token)) {

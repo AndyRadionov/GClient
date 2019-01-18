@@ -6,6 +6,7 @@ import com.radionov.githubclient.data.repository.GithubAuthRepository
 import com.radionov.githubclient.data.repository.GithubRepository
 import com.radionov.githubclient.data.repository.LocalRepository
 import io.reactivex.Observable
+import io.reactivex.Single
 
 /**
  * @author Andrey Radionov
@@ -18,6 +19,10 @@ class ReposInteractor(
 
     fun isAuthorized(): Boolean {
         return authRepository.getLocalToken().isNotEmpty()
+    }
+
+    fun signIn(accessCode: String): Single<String> {
+        return authRepository.getRemoteToken(accessCode)
     }
 
     fun signOut() {
