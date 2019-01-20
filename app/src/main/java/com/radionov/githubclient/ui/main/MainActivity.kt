@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var reposAdapter: ReposAdapter
-    private val clickListener = object: ReposAdapter.OnItemClickListener {
+    private val clickListener = object : ReposAdapter.OnItemClickListener {
         override fun onClick(repository: Repository) {
             val intent = Intent(this@MainActivity, DetailsActivity::class.java)
             intent.putExtra(REPO_EXTRA, repository)
