@@ -2,10 +2,7 @@ package com.radionov.githubclient.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.text.TextUtils
 import com.radionov.githubclient.data.entity.Repository
-import com.radionov.githubclient.data.repository.GithubAuthRepository
-import com.radionov.githubclient.data.repository.GithubRepository
 import com.radionov.githubclient.interactor.ReposInteractor
 import com.radionov.githubclient.utils.AuthStates
 import com.radionov.githubclient.utils.Responses

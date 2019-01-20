@@ -2,9 +2,7 @@ package com.radionov.githubclient.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.radionov.githubclient.data.entity.Commit
 import com.radionov.githubclient.data.entity.CommitResponse
-import com.radionov.githubclient.data.repository.GithubRepository
 import com.radionov.githubclient.interactor.ReposInteractor
 import com.radionov.githubclient.utils.Responses
 import com.radionov.githubclient.utils.RxComposers
