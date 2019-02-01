@@ -4,7 +4,6 @@ import com.radionov.githubclient.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
-
 /**
  * @author Andrey Radionov
  */
