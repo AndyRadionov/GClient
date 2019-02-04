@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:text="Author:"
+            android:text="@string/label_author"
             android:textSize="14sp"
             app:layout_constraintLeft_toRightOf="@+id/line"
             app:layout_constraintTop_toBottomOf="@id/tv_repo_name" />
@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="License:"
+            android:text="@string/label_license"
             android:textSize="14sp"
             app:layout_constraintLeft_toRightOf="@+id/line"
             app:layout_constraintTop_toBottomOf="@id/label_author" />
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="None"
+            android:text="@string/label_none"
             android:textColor="@android:color/black"
             app:layout_constraintLeft_toRightOf="@+id/label_license"
             app:layout_constraintTop_toBottomOf="@id/label_author" />
