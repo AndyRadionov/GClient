@@ -14,7 +14,7 @@ class LocalRepository(private val reposDao: ReposDao,
 
     fun getRepos() = reposDao.getRepos()
 
-    fun saveRepos(repos: List<Repository>) =
+    fun saveRepos(repos: List<Repository>): Completable =
         Completable.fromAction {
             reposDao.saveRepos(repos)
         }
@@ -22,12 +22,12 @@ class LocalRepository(private val reposDao: ReposDao,
 
     fun getCommit(repo: String) = commitsDao.getCommit(repo)
 
-    fun addCommit(commit: CommitResponse) =
+    fun addCommit(commit: CommitResponse): Completable =
         Completable.fromAction {
             commitsDao.addCommit(commit)
         }
 
-    fun clear() =
+    fun clear(): Completable =
         Completable.fromAction {
             reposDao.clear()
             commitsDao.clear()
