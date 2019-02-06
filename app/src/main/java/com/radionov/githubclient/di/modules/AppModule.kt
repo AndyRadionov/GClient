@@ -1,7 +1,5 @@
 package com.radionov.githubclient.di.modules
 
-import android.app.Application
-import android.preference.PreferenceManager
 import android.support.annotation.NonNull
 import com.radionov.githubclient.data.datasource.local.CacheManager
 import com.radionov.githubclient.data.datasource.local.Prefs

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.radionov.githubclient.R
-import com.radionov.githubclient.data.entity.Commit
 import com.radionov.githubclient.data.entity.CommitResponse
 import com.radionov.githubclient.data.entity.Repository
 import com.radionov.githubclient.ui.common.BaseActivity
