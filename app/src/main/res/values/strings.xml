@@ -9,4 +9,6 @@
     <string name="label_license">License:</string>
     <string name="label_none">None</string>
     <string name="label_sign_out">Sign out</string>
+
+    <string name="msg_fail">Fail</string>
 </resources>

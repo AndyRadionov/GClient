@@ -38,7 +38,7 @@ class DetailsActivity : BaseActivity() {
             .observe(this, Observer { response ->
                 response?.let {
                     if (it.first == Responses.FAIL) {
-                        Toast.makeText(this@DetailsActivity, "Fail", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@DetailsActivity, getString(R.string.msg_fail), Toast.LENGTH_SHORT).show()
                         finish()
                     } else {
                         setViews(it.second as CommitResponse)
@@ -56,8 +56,12 @@ class DetailsActivity : BaseActivity() {
         tv_stars.text = repo.starsCount.toString()
         tv_forks.text = repo.forksCount.toString()
         repo.description?.let { tv_description.text = it }
-        tv_commit_hash.text = commit.sha.substring(0, 8)
+        tv_commit_hash.text = commit.sha.substring(0, SHA_LENGTH)
         tv_commit_msg.text = commit.commit.message
         tv_commit_author.text = commit.commit.author.toString()
+    }
+
+    companion object {
+        private const val SHA_LENGTH = 8
     }
 }
